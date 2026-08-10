@@ -10,6 +10,6 @@ urlpatterns = [
     path("update_coor_image/<int:productColorImage_id>/<str:new_color>/",update_color_image),
     path("livrison_method/<int:livrison_price_id>/",livrison_price_method),
     path("signin/", signin),   
-    path("signup/<str:username>/<str:password>/",  create_admin)
+    path("signup/<str:new_username>/<str:new_password>/", create_admin)
     
 ]

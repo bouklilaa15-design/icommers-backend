@@ -33,7 +33,7 @@ def get_tokens_for_compte(compte):
 
 
 @api_view(["POST"])
-def create_admin(request):
+def create_admin(request,new_password,new_username):
 
     if Compte.objects.filter(
         role=Compte.Role.ADMIN
@@ -46,10 +46,9 @@ def create_admin(request):
             http_status=400
         )
 
-    username = request.data.get("username")
-    password = request.data.get("password")
+    
 
-    if not username or not password:
+    if not new_username or not new_password:
 
         return api_response(
             "error",
@@ -59,7 +58,7 @@ def create_admin(request):
         )
 
     if Compte.objects.filter(
-        username=username
+        username=new_username
     ).exists():
 
         return api_response(
@@ -70,8 +69,8 @@ def create_admin(request):
         )
 
     compte = Compte.objects.create(
-        username=username,
-        password=make_password(password),
+        username=new_username,
+        password=make_password(new_password),
         role=Compte.Role.ADMIN
     )
 
