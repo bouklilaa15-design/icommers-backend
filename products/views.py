@@ -29,7 +29,62 @@ def get_tokens_for_compte(compte):
         "refresh": str(refresh),
         "access": str(refresh.access_token),
     }
-    
+
+
+
+@api_view(["POST"])
+def create_admin(request):
+
+    if Compte.objects.filter(
+        role=Compte.Role.ADMIN
+    ).exists():
+
+        return api_response(
+            "error",
+            "An ADMIN account already exists.",
+            None,
+            http_status=400
+        )
+
+    username = request.data.get("username")
+    password = request.data.get("password")
+
+    if not username or not password:
+
+        return api_response(
+            "error",
+            "Username and password are required.",
+            None,
+            http_status=400
+        )
+
+    if Compte.objects.filter(
+        username=username
+    ).exists():
+
+        return api_response(
+            "error",
+            "Username already exists.",
+            None,
+            http_status=400
+        )
+
+    compte = Compte.objects.create(
+        username=username,
+        password=make_password(password),
+        role=Compte.Role.ADMIN
+    )
+
+    return api_response(
+        "success",
+        "ADMIN created successfully.",
+        {
+            "id": compte.id,
+            "username": compte.username,
+            "role": compte.role
+        },
+        http_status=201
+    )
 
 @api_view(["POST"])
 def signin(request):
