@@ -11,6 +11,11 @@ from .models import Compte
 
 
 
+
+
+
+
+
 class SignUpSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -99,7 +104,7 @@ class ProductSerializerUpdate(serializers.ModelSerializer):
 class ProductSizeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductSize
-        fields = ("id","size", "qte")
+        fields = ("id","size","eqSize", "qte")
       
     
 
@@ -145,10 +150,13 @@ class ProductSerializerPush(serializers.ModelSerializer):
           )
   
           for size_data in sizes_data:
-              ProductSize.objects.create(
-                  productColor=product_color,
-                  **size_data
-              )
+              
+               eq_size = getattr(EqSize, size_data["size"]).value
+               ProductSize.objects.create(
+                   productColor=product_color,
+                   **size_data,
+                   eqSize=eq_size )
+               
   
       return product
   
@@ -173,13 +181,14 @@ class ProductSerializer(serializers.ModelSerializer):
       
 class OrderSerializer (serializers.ModelSerializer):
 
-
     class Meta:
         model = Orders
         fields = (
             "productSize",
-            "quantity", 
+            "quantity",
+            "price",
         )
+       
         
 class CommendSerializerPush(serializers.ModelSerializer):
 
@@ -234,7 +243,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
         )
 
         
-        print("www=============www")
+        
         if validated_data.get("willya") == "Alger":
 
             commend = Commend.objects.create(
@@ -258,7 +267,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
                 image,
                 "Reciptes"
             )
-            print("WWw+++++++++++++++++++www")
+            
             commend = Commend.objects.create(
                 **validated_data,
                 image_url=recipte_url
@@ -273,20 +282,20 @@ class CommendSerializerPush(serializers.ModelSerializer):
         orders_to_create = []
 
         for product_size, quantity in grouped_orders.items():
-            print("-1-1-1-")
+            
             unit_price = (
                 product_size
                 .productColor
                 .product
                 .price
             )
-            print("uiuiuiuioooouiiui")
+           
             total_price = price_and_livraison(
                 commend.willya,
                 unit_price,
                 quantity,
             )
-            print("=11111=")
+    
             orders_to_create.append(
                 Orders(
                     commend=commend,
@@ -295,7 +304,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
                     price=total_price,
                 )
             )
-            print("ioioiooiii")
+           
         Orders.objects.bulk_create(
             orders_to_create
         )
@@ -316,7 +325,7 @@ class ProductColorSerializerOrder(serializers.ModelSerializer):
 
     class Meta:
         model = ProductColorImage
-        fields = ["id", "color", "product"]
+        fields = ["id", "color", "product", "image"]
    
 class ProductSizeSerializerOrder(serializers.ModelSerializer):
     productColor = ProductColorSerializerOrder(read_only=True)
@@ -331,7 +340,7 @@ class OrderSerializerOrder (serializers.ModelSerializer):
     
     class Meta:
         model = Orders
-        fields = ["id", "productSize", "quantity"]
+        fields = ["id", "productSize", "quantity" , "price"]
 
 class CommendSerializer(serializers.ModelSerializer):
     commend_orders = OrderSerializerOrder(many=True, read_only=True)

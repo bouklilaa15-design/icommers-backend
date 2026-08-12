@@ -17,6 +17,15 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from .permissions import IsAdmin
 
+
+
+
+
+
+
+
+
+
 def get_tokens_for_compte(compte):
 
     refresh = RefreshToken()
