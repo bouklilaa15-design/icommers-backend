@@ -186,7 +186,7 @@ class OrderSerializer (serializers.ModelSerializer):
         fields = (
             "productSize",
             "quantity",
-            "price",
+            
         )
        
         
