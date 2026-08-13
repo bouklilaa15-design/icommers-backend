@@ -177,6 +177,7 @@ class ProductSerializer(serializers.ModelSerializer):
             "name",
             "price",
             "oldPrice",
+            "category",
             "productsInfo",
         )
 
