@@ -106,17 +106,23 @@ class ProductSizeSerializer(serializers.ModelSerializer):
         model = ProductSize
         fields = ("id","size","eqSize", "qte")
       
-    
+class ManyProductSizeSerializer(serializers.Serializer):
+    info=ProductSizeSerializer(many=True)
 
 class ProductColorImageSerializer(serializers.ModelSerializer):
     sizesQte = ProductSizeSerializer(many=True)
     class Meta:
         model = ProductColorImage
         fields = ("id","color","image", "sizesQte")
-
-
+        read_only_fields = ("image",)
         
-        
+
+     
+class ManyColorImageSerializer(serializers.Serializer):
+    info=ProductColorImageSerializer(many=True)
+  
+    
+    
 class ProductSerializerPush(serializers.ModelSerializer):
     productsInfo = ProductColorImageSerializer(many=True)
 
