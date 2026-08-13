@@ -996,7 +996,7 @@ def update_commend_status_or_delete(request, commend_id, new_status):
 @api_view(["PUT","DELETE","POST"])
 @permission_classes([IsAdmin])
 @transaction.atomic
-def update_or_delete_pr_size(request, product_size_id,productColor_id):
+def pr_size_method(request, product_size_id,productColor_id):
     
     try:
         
@@ -1129,7 +1129,7 @@ def update_or_delete_pr_size(request, product_size_id,productColor_id):
 @api_view(["PUT","POST","DELETE"])
 @permission_classes([IsAdmin])
 @transaction.atomic
-def update_color_image(  request, productColorImage_id,  new_color ,product_id):
+def pr_colorImage_metho(  request, productColorImage_id,  new_color ,product_id):
 
     try:
 
