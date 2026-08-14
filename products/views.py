@@ -1129,7 +1129,7 @@ def pr_size_method(request, product_size_id,productColor_id):
 @api_view(["PUT","POST","DELETE"])
 @permission_classes([IsAdmin])
 @transaction.atomic
-def pr_colorImage_metho(  request, productColorImage_id,  new_color ,product_id):
+def pr_colorImage_method(  request, productColorImage_id,  new_color ,product_id):
 
     try:
 
