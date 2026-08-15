@@ -1,6 +1,11 @@
 from django.urls import path
 from .views import *
+from django.http import JsonResponse
+
+def health_check(request):
+    return JsonResponse({"status":"ok"})
 urlpatterns = [
+    path("health/",health_check),
     path('category_method/<int:category_id>/', Category_method),
     path("products_method/<int:category_id>/<int:product_id>/", products_method),
     path("get_offers/", get_offers),
