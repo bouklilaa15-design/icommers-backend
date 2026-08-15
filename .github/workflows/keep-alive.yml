@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Ping Render
         run: |
-          curl -f https://icommers-backend.onrender.com/api/health/
+          curl -f https://icommers-backend.onrender.com/api/products/health/
