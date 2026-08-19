@@ -364,6 +364,8 @@ class CommendSerializer(serializers.ModelSerializer):
             "phone",
             "willya",
             "commend_date",
+            "baladiya",
+            "is_birou",
             "status",
             "image_url",
             "commend_orders"
