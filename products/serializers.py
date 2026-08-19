@@ -220,6 +220,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
             "willya",
             "baladiya",
             "commend_orders",
+            "is_birou",
         )
 
     def validate(self, data):
@@ -301,6 +302,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
             total_price = price_and_livraison(
                 commend.willya,
                 commend.baladiya,
+                commend.is_birou,
                 unit_price,
                 quantity,
             )
