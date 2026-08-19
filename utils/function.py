@@ -10,7 +10,7 @@ from products.models import LivrisonPrice
 def price_and_livraison(willya , baladiya , is_birou , price , quantity):
     
 
-         obj = LivrisonPrice.objects.get(
+    obj = LivrisonPrice.objects.get(
                     willya=willya,
                     is_birou=is_birou,
                 )
