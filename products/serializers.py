@@ -381,3 +381,5 @@ class LivrsionPriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = LivrisonPrice
         fields="__all__" 
+class LivrsionPriceSerializerPush(serializers.Serializer):
+    info=LivrsionPriceSerializer(many=True)
