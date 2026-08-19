@@ -668,7 +668,7 @@ def commend_order_method(
 
            
 
-            if willya != "Alger" and not new_image:
+            """" if willya != "Alger" and not new_image:
 
                 return api_response(
                     "error",
@@ -677,7 +677,7 @@ def commend_order_method(
                     "to confirm your order and ensure delivery. "
                     "Thank you for your understanding.",
                     http_status=400
-                )
+                )"""
 
             
 

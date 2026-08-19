@@ -218,6 +218,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
             "fullName",
             "phone",
             "willya",
+            "baladiya",
             "commend_orders",
         )
 
@@ -260,20 +261,20 @@ class CommendSerializerPush(serializers.ModelSerializer):
         else:
 
             image = self.context.get("image")
+            recipte_url=None
+            if  image:
 
-            if not image:
+                #raise serializers.ValidationError(
+                 #   {
+                  #      "image":
+                   #     "Receipt image is required."
+                    #}
+                #)
 
-                raise serializers.ValidationError(
-                    {
-                        "image":
-                        "Receipt image is required."
-                    }
-                )
-
-            recipte_url = upload_image(
+                recipte_url = upload_image(
                 image,
                 "Reciptes"
-            )
+                )
             
             commend = Commend.objects.create(
                 **validated_data,
@@ -299,6 +300,7 @@ class CommendSerializerPush(serializers.ModelSerializer):
            
             total_price = price_and_livraison(
                 commend.willya,
+                commend.baladiya,
                 unit_price,
                 quantity,
             )

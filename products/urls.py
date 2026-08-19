@@ -4,7 +4,9 @@ from django.http import JsonResponse
 
 def health_check(request):
     return JsonResponse({"status":"ok"})
+
 urlpatterns = [
+    
     path("health/",health_check),
     path('category_method/<int:category_id>/', Category_method),
     path("products_method/<int:category_id>/<int:product_id>/", products_method),
@@ -15,7 +17,6 @@ urlpatterns = [
     path("update_coor_image/<int:productColorImage_id>/<str:new_color>/<int:product_id>/",pr_colorImage_method),
     path("livrison_method/<int:livrison_price_id>/",livrison_price_method),
     path("signin/", signin),   
-    path("signup/<str:new_username>/<str:new_password>/", create_admin),
-   
+    path("signup/<str:new_username>/<str:new_password>/", create_admin),  
     
 ]
