@@ -9,13 +9,7 @@ from products.models import LivrisonPrice
 
 def price_and_livraison(willya , baladiya , is_birou , price , quantity):
     
-    if willya=="Alger":
-       obj = LivrisonPrice.objects.get(
-            willya=willya,
-            baladiya=baladiya,
-            is_birou=is_birou,
-        )
-    else:
+
          obj = LivrisonPrice.objects.get(
                     willya=willya,
                     is_birou=is_birou,
